@@ -1,0 +1,160 @@
+@mixin hideScrollbars {
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+$cool-gray: #eff1f1;
+$text-dark: #333;
+$text-primary: #41B0EE;
+
+body {
+  font-family: "San Francisco Text", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.justify-center {
+  text-align: center;
+  justify-content: center;
+}
+
+.justify-space-between{
+  justify-content: space-between;
+}
+
+
+.rolldate-container {
+  font-size: calc(0.65rem + 2vw) !important;
+  color: $text-dark;
+  text-align: center;
+  background-color: #f9f9f8;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+  .picker-window {
+    position: absolute;
+    border-top: 1px solid darken($cool-gray, 10);
+    border-bottom: 1px solid darken($cool-gray, 10);
+    height: 1.5em;
+    left: 0;
+    top: 50%;
+    transform: translateY(-65%) !important;
+    width: 100%;
+    pointer-events: none;
+  }
+  .rolldate-mask {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: #848282;
+    opacity: 0.4;
+  }
+  .rolldate-header {
+    border-bottom: 1px solid #e0e0e0;
+    height: calc(2rem + 5vw);
+    background: #f9f9f8;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    z-index: 1;
+  }
+  .rolldate-confirm {
+    color: $text-primary !important;
+    cursor: pointer;
+  }
+  .arrow-container {
+    padding-left: 0.5rem;
+  }
+  .left-arrow,
+  .right-arrow {
+    width: calc(0.5rem + 2vw);
+    height: calc(0.5rem + 2vw);
+    transition: 0.5s;
+    box-shadow: -2px 2px 0 $text-primary;
+  }
+  .left-arrow {
+    transform: rotate(45deg);
+  }
+  .right-arrow {
+    transform: rotate(-135deg);
+    margin-left: 1rem;
+  }
+  .rolldate-picker {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    display: inline-grid;
+    box-shadow: 0 0.5vw 2vw -5px rgba(black, 0.2);
+    position: relative;
+    border-top: 1rem solid white;
+    border-bottom: 1rem solid white;
+    background: white;
+    font-feature-settings: "tnum";
+    font-weight: 400;
+    &:before,
+    &:after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 2.25em;
+      pointer-events: none;
+    }
+    &:before {
+      top: -0.2em;
+      background: linear-gradient(white, rgba(white, 0.7));
+    }
+    &:after {
+      bottom: -0.2em;
+      background: linear-gradient(rgba(white, 0.7), white);
+      height: 2.7em;
+    }
+
+    .picker-day {
+      padding-right: 2em;
+      span {
+        padding-left: 0.5em;
+      }
+    }
+    ul {
+      @include hideScrollbars();
+      max-height: 7.5em;
+      overflow-y: scroll;
+      scroll-snap-type: y mandatory;
+      padding-bottom: 3em;
+      padding-top: 3em;
+      list-style-type: none;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    li {
+      scroll-snap-align: center;
+      height: 1.5em;
+      text-align: right;
+      word-spacing: 0.2em;
+      font-size: calc(0.65rem + 2vw) !important
+    }
+  }
+
+}
+
